@@ -32,4 +32,22 @@ class BinarySearchTree {
       return false;
     }
   }
+
+  breadthFirstSearch(fn) {
+    const queue = [this];
+    while (queue.length) {
+      const currentNode = queue.shift();
+      if (currentNode.left) queue.push(currentNode.left);
+      if (currentNode.right) queue.push(currentNode.right);
+      fn(currentNode.val);
+    }
+  }
+
+  depthFirstSearch(fn, option = 'in-order') {
+    if (option === 'pre-order') fn(this.val);
+    if (this.left) this.left.depthFirstSearch(fn, option);
+    if (option === 'in-order') fn(this.val);
+    if (this.right) this.right.depthFirstSearch(fn, option);
+    if (option === 'post-order') fn(this.val);
+  }
 }
