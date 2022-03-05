@@ -37,8 +37,8 @@ describe('unweighted undirected graph >', () => {
     test('removeVertex removes all edges of that vertex and the vertex itself', () => {
         g.addVertex("A");
         g.addVertex("B");
-        g.addVertex("C")
-        g.addVertex("D")
+        g.addVertex("C");
+        g.addVertex("D");
         g.addEdge("A", "B");
         g.addEdge("A", "C");
         g.addEdge("B", "C");
@@ -49,6 +49,56 @@ describe('unweighted undirected graph >', () => {
         expect(g.adjacencyList['B']).toMatchObject(['C', 'D']);
         expect(g.adjacencyList['C']).toMatchObject(['B', 'D']);
     });
+
+    test('recursive DFS visits neighbors and continues to visit neighbors before backtracking', () => {
+        g.addVertex("A");
+        g.addVertex("B");
+        g.addVertex("C");
+        g.addVertex("D");
+        g.addVertex("E");
+        g.addVertex("F");
+        g.addEdge("A", "B");
+        g.addEdge("A", "C");
+        g.addEdge("B","D");
+        g.addEdge("C","E");
+        g.addEdge("D","E");
+        g.addEdge("D","F");
+        g.addEdge("E","F");
+        //          A
+        //        /   \
+        //       B     C
+        //       |     |
+        //       D --- E
+        //        \   /
+        //          F
+        expect(g.depthFirstRecursive('A')).toMatchObject(['A', 'B', 'D', 'E', 'C', 'F']);
+    });
+
+    test('iterative DFS visits neighbors and continues to visit neighbors before backtracking', () => {
+        g.addVertex("A");
+        g.addVertex("B");
+        g.addVertex("C");
+        g.addVertex("D");
+        g.addVertex("E");
+        g.addVertex("F");
+        g.addEdge("A", "B");
+        g.addEdge("A", "C");
+        g.addEdge("B","D");
+        g.addEdge("C","E");
+        g.addEdge("D","E");
+        g.addEdge("D","F");
+        g.addEdge("E","F");
+        //          A
+        //        /   \
+        //       B     C
+        //       |     |
+        //       D --- E
+        //        \   /
+        //          F
+        expect(g.depthFirstIterative('A')).toMatchObject(['A', 'C', 'E', 'F', 'D', 'B']);
+    });
+
+
 });
 
 // g.addVertex("A")
