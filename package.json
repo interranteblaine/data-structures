@@ -1,0 +1,22 @@
+{
+  "name": "data-structures",
+  "version": "1.0.0",
+  "description": "data-structures implemented in Javascript",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/interranteblaine/data-structures.git"
+  },
+  "author": "Blaine Interrante",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/interranteblaine/data-structures/issues"
+  },
+  "homepage": "https://github.com/interranteblaine/data-structures#readme",
+  "devDependencies": {
+    "jest": "^27.5.1"
+  }
+}
