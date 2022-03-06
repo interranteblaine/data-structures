@@ -5,7 +5,7 @@
 class Node {
   constructor(val) {
     this.val = val;
-    this.next = next;
+    this.next = null;
   }
 }
 
@@ -18,7 +18,7 @@ class Stack {
 
   push(val) {
     const newNode = new Node(val);
-    if (!this.head) {
+    if (!this.first) {
       this.first = newNode;
       this.last = newNode;
     } else {
@@ -39,4 +39,9 @@ class Stack {
     this.length--;
     return temp.val;
   }
+}
+
+module.exports = {
+  Node,
+  Stack
 }
