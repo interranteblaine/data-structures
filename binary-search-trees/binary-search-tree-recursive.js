@@ -51,3 +51,5 @@ class BinarySearchTree {
     if (option === 'post-order') fn(this.val);
   }
 }
+
+module.exports = BinarySearchTree;
