@@ -98,6 +98,30 @@ describe('unweighted undirected graph >', () => {
         expect(g.depthFirstIterative('A')).toMatchObject(['A', 'C', 'E', 'F', 'D', 'B']);
     });
 
+    test('BFS visits neighbors before going deeper', () => {
+        g.addVertex("A");
+        g.addVertex("B");
+        g.addVertex("C");
+        g.addVertex("D");
+        g.addVertex("E");
+        g.addVertex("F");
+        g.addEdge("A", "B");
+        g.addEdge("A", "C");
+        g.addEdge("B","D");
+        g.addEdge("C","E");
+        g.addEdge("D","E");
+        g.addEdge("D","F");
+        g.addEdge("E","F");
+        //          A
+        //        /   \
+        //       B     C
+        //       |     |
+        //       D --- E
+        //        \   /
+        //          F
+        expect(g.breadthFirst('A')).toMatchObject(['A', 'B', 'C', 'D', 'E', 'F']);
+    });
+
 
 });
 
