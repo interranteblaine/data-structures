@@ -66,7 +66,7 @@ class BinarySearchTree {
 
   breadthFirstSearch(fn) {
     const queue = [this.root];
-    while(queue.length) {
+    while (queue.length) {
       const currentNode = queue.shift();
       if (currentNode.left) queue.push(currentNode.left);
       if (currentNode.right) queue.push(currentNode.right);
@@ -74,11 +74,57 @@ class BinarySearchTree {
     }
   }
 
-  depthFirstSearch(fn, option = 'in-order') {
-    if (option === 'pre-order') fn(this.root.val);
-    if (this.root.left) this.root.left.depthFirstSearch(fn, option);
-    if (option === 'in-order') fn(this.root.val);
-    if (this.root.right) this.root.right.depthFirstSearch(fn, option);
-    if (option === 'post-order') fn(this.root.val);
+  depthFirstSearchPreOrder(fn) {
+    const stack = [this.root];
+    let currNode;
+    while (stack.length) {
+      currNode = stack.pop();
+      fn(currNode);
+      if (currNode.right) stack.push(currNode.right);
+      if (currNode.left) stack.push(currNode.left);
+    }
+  }
+
+  depthFirstSearchInOrder(fn) {
+    const stack = [];
+    let currNode = this.root;
+    while (currNode !== null || stack.length) {
+      while (currNode !== null) {
+        stack.push(currNode);
+        currNode = currNode.left;
+      }
+      currNode = stack.pop();
+      fn(currNode);
+      currNode = currNode.right;
+    }
+  }
+
+  //      10
+  //   5     13
+  // 2  7  11  16
+
+  depthFirstSearchPostOrder(fn) {
+    const stack = [];
+    let currNode = this.root;
+    while (true) {
+      while (currNode !== null) {
+        stack.push(currNode);
+        stack.push(currNode);
+        currNode = currNode.left;
+      }
+      if (!stack.length) return;
+      currNode = stack.pop();
+      if (stack.length && stack[stack.length - 1] === currNode) {
+        currNode = currNode.right;
+      } else {
+        fn(currNode);
+        currNode = null;
+      }
+    }
   }
 }
+
+module.exports = {
+  Node,
+  BinarySearchTree,
+};
