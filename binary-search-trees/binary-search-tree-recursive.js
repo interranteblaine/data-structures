@@ -44,11 +44,11 @@ class BinarySearchTree {
   }
 
   depthFirstSearch(fn, option = 'in-order') {
-    if (option === 'pre-order') fn(this.val);
+    if (option === 'pre-order') fn(this.val); // root > left side > right side
     if (this.left) this.left.depthFirstSearch(fn, option);
-    if (option === 'in-order') fn(this.val);
+    if (option === 'in-order') fn(this.val); // left side > root > right side
     if (this.right) this.right.depthFirstSearch(fn, option);
-    if (option === 'post-order') fn(this.val);
+    if (option === 'post-order') fn(this.val); // left side > right side > root
   }
 }
 

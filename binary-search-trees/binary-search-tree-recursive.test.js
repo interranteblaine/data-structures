@@ -1,9 +1,5 @@
 const BinarySearchTree = require('./binary-search-tree-recursive');
 
-//      10
-//   5     13
-// 2  7  11  16
-
 describe('bst recursive >', () => {
     let tree;
     beforeEach(() => {
@@ -40,6 +36,7 @@ describe('bst recursive >', () => {
         tree.breadthFirstSearch(storeValsInArr);
         expect(testArr).toMatchObject([10, 5, 13, 2, 7, 11, 16]);
     });
+
     test('dfs should process root, left, or right appropirately', () => {
         const preOrder = [];
         const inOrder = [];
@@ -47,18 +44,21 @@ describe('bst recursive >', () => {
         const _preorder = (val) => (preOrder.push(val));
         const _inOrder = (val) => (inOrder.push(val));
         const _postOrder = (val) => (postOrder.push(val));
+        //      10
+        //   5     13
+        // 2  7  11  16
         tree.insert(5);
         tree.insert(13);
         tree.insert(11);
         tree.insert(2);
         tree.insert(16);
         tree.insert(7);
-        tree.depthFirstSearch(_preorder, 'pre-order');
+        tree.depthFirstSearch(_preorder, 'pre-order'); // root > left side > right side
         expect(preOrder).toMatchObject([10, 5, 2, 7, 13, 11, 16]);
-        // tree.depthFirstSearch(_inOrder, 'in-order');
-        // expect(inOrder).toMatchObject([10, 5, 2, 7, 13, 11, 16]);
-        // tree.depthFirstSearch(_postOrder, 'post-order');
-        // expect(postOrder).toMatchObject([10, 5, 2, 7, 13, 11, 16]);
+        tree.depthFirstSearch(_inOrder, 'in-order'); // left side > root > right side
+        expect(inOrder).toMatchObject([2, 5, 7, 10, 11, 13, 16]);
+        tree.depthFirstSearch(_postOrder, 'post-order'); // left side > right side > root
+        expect(postOrder).toMatchObject([2, 7, 5, 11, 16, 13, 10]);
     });
 
 });
