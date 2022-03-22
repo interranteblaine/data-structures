@@ -75,3 +75,8 @@ class PriorityQueue {
     }
   }
 }
+
+module.exports = {
+  Node,
+  PriorityQueue
+}
