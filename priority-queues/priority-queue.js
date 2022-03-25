@@ -14,7 +14,7 @@ class PriorityQueue {
     this.values = [];
   }
 
-  enqeue(val, priority) {
+  enqueue(val, priority) {
     const newNode = new Node(val, priority);
     this.values.push(newNode);
     this.bubbleUp();

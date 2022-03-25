@@ -78,10 +78,10 @@ class WeightedGraph {
     for (let vertex in this.adjacencyList) {
       if (vertex === start) {
         distances[vertex] = 0;
-        nodes.enqeue(vertex, 0);
+        nodes.enqueue(vertex, 0);
       } else {
         distances[vertex] = Infinity;
-        nodes.enqeue(vertex, Infinity);
+        nodes.enqueue(vertex, Infinity);
       }
       previous[vertex] = null;
     }
@@ -103,7 +103,7 @@ class WeightedGraph {
           if (currDistance < distances[nextNeighbor]) {
             distances[nextNeighbor] = currDistance;
             previous[nextNeighbor] = smallest;
-            nodes.enqeue(nextNeighbor, currDistance);
+            nodes.enqueue(nextNeighbor, currDistance);
           }
         }
       }
