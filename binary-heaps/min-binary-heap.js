@@ -46,27 +46,28 @@ class MinBinaryHeap {
       let leftChild;
       let rightChild;
       let swap = null;
-      while (true) {
-        if (leftChildIdx < length) {
-          leftChild = this.values[leftChildIdx];
-          if (leftChild < element) {
-            swap = leftChildIdx;
-          }
+
+      if (leftChildIdx < length) {
+        leftChild = this.values[leftChildIdx];
+        if (leftChild < element) {
+          swap = leftChildIdx;
         }
-        if (rightChildIdx < length) {
-          rightChild = this.values[rightChildIdx];
-          if (
-            (swap === null && rightChild < element) ||
-            (swap !== null && rightChild < leftChild)
-          ) {
-            swap = rightChildIdx;
-          }
-        }
-        if (swap === null) break;
-        this.values[idx] = this.values[swap];
-        this.values[swap] = element;
-        idx = swap;
       }
+      if (rightChildIdx < length) {
+        rightChild = this.values[rightChildIdx];
+        if (
+          (swap === null && rightChild < element) ||
+          (swap !== null && rightChild < leftChild)
+        ) {
+          swap = rightChildIdx;
+        }
+      }
+      if (swap === null) break;
+      this.values[idx] = this.values[swap];
+      this.values[swap] = element;
+      idx = swap;
     }
   }
 }
+
+module.exports = MinBinaryHeap;

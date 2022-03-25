@@ -68,3 +68,5 @@ class MaxBinaryHeap {
     }
   }
 }
+
+module.exports = MaxBinaryHeap;
