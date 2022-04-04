@@ -99,10 +99,6 @@ class BinarySearchTree {
     }
   }
 
-  //      10
-  //   5     13
-  // 2  7  11  16
-
   depthFirstSearchPostOrder(fn) {
     const stack = [];
     let currNode = this.root;
@@ -121,6 +117,48 @@ class BinarySearchTree {
         currNode = null;
       }
     }
+  }
+
+  remove(rootNode, val, parent = null) {
+    let currNode = rootNode;
+    while (currNode !== null) {
+      if (currNode.val !== val) {
+        let direction = val < currNode.val ? 'left' : 'right';
+        parent = currNode;
+        currNode = currNode[direction];
+      } else {
+        if (currNode.left !== null && currNode.right !== null) {
+          currNode.val = this.getMinValLeftSubTree(currNode.right);
+          this.remove(currNode.right, currNode.val, currNode);
+        } else if (parent === null) {
+          if (currNode.left !== null) {
+            currNode.val = currNode.left.val;
+            currNode.right = currNode.left.right;
+            currNode.left = currNode.left.left;
+          } else if (currNode.right !== null) {
+            currNode.val = currNode.right.val;
+            currNode.left = currNode.right.left;
+            currNode.right = currNode.right.right;
+          } else {
+            currNode.val = null;
+          }
+        } else if (parent.left === currNode) {
+          parent.left = currNode.left !== null ? currNode.left : currNode.right;
+        } else if (parent.right === currNode) {
+          parent.right = currNode.left !== null ? currNode.left : currNode.right;
+        }
+        break;
+      }
+    }
+    return this;
+  }
+
+  getMinValLeftSubTree(rightSubtree) {
+    let currNode = rightSubtree;
+    while(currNode.left !== null) {
+      currNode = currNode.left;
+    }
+    return currNode.val;
   }
 }
 

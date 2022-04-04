@@ -84,4 +84,23 @@ describe("bst iterative >", () => {
     tree.depthFirstSearchPostOrder(testFunc);
     expect(testArr).toMatchObject([2, 7, 5, 11, 16, 13, 10]);
   });
+
+  test("remove should delete the node value and update the BST", () => {
+    const tree = new BinarySearchTree();
+    tree.insert(10);
+    tree.insert(5);
+    tree.insert(17);
+    tree.insert(2);
+    tree.insert(1);
+    tree.insert(22);
+    tree.insert(14);
+    tree.insert(12);
+    tree.insert(15);
+    tree.insert(13);
+    tree.remove(tree.root, 10);
+    expect(tree.root.val === 12).toBe(true);
+    expect(tree.root.left.val === 5 && tree.root.right.val === 17).toBe(true);
+    expect(tree.root.right.left.left.val === 13).toBe(true);
+    expect(tree.find(10)).toBe(undefined);
+  });
 });
