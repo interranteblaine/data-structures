@@ -43,12 +43,51 @@ class BinarySearchTree {
     }
   }
 
-  depthFirstSearch(fn, option = 'in-order') {
-    if (option === 'pre-order') fn(this.val); // root > left side > right side
+  depthFirstSearch(fn, option = "in-order") {
+    if (option === "pre-order") fn(this.val); // root > left side > right side
     if (this.left) this.left.depthFirstSearch(fn, option);
-    if (option === 'in-order') fn(this.val); // left side > root > right side
+    if (option === "in-order") fn(this.val); // left side > root > right side
     if (this.right) this.right.depthFirstSearch(fn, option);
-    if (option === 'post-order') fn(this.val); // left side > right side > root
+    if (option === "post-order") fn(this.val); // left side > right side > root
+  }
+
+  remove(val, parent = null) {
+    if (this.val !== val) {
+      let direction = val < this.val ? "left" : "right";
+      if (this[direction] !== null) {
+        this[direction].remove(val, this);
+      }
+    } else {
+      if (this.left !== null && this.right !== null) {
+        this.val = this.right.getMinValFromSubTree();
+        this.right.remove(this.val, this);
+      } else if (parent === null) {
+        if (this.left !== null) {
+          this.val = this.left.val;
+          this.val.right = this.left.right;
+          this.val.left = this.left.left;
+        } else if (this.right !== null) {
+          this.val = this.right.val;
+          this.left = this.right.left;
+          this.right = this.right.right;
+        } else {
+          // single tree node
+        }
+      } else if (parent.left === this) {
+        parent.left = this.left !== null ? this.left : this.right;
+      } else if (parent.right === this) {
+        parent.right = this.left !== null ? this.left : this.right;
+      }
+    }
+    return this;
+  }
+
+  getMinValFromSubTree() {
+    if (this.left === null) {
+      return this.val;
+    } else {
+      return this.left.getMinValFromSubTree();
+    }
   }
 }
 
